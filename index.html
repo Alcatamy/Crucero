@@ -1,0 +1,1966 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Guía de Crucero Interactiva: Lo Mejor de Italia y Croacia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        :root {
+            --color-primary: #1e3a8a;
+            --color-secondary: #f59e0b;
+            --color-accent: #0891b2;
+            --color-background: #fefefe;
+            --color-surface: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-muted: #64748b;
+        }
+        
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(45deg, rgba(30, 58, 138, 0.8), rgba(15, 23, 42, 0.6));
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .toc-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--color-surface);
+            border-right: 1px solid #e2e8f0;
+            z-index: 50;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .citation {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-left: 0.25rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .citation:hover {
+            background: #0e7490;
+        }
+        
+        .day-badge {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-item {
+            border-left: 3px solid var(--color-secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--color-secondary);
+            border-radius: 50%;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .bento-item {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .toc-sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.25rem;
+                line-height: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.125rem;
+            }
+            
+            .bento-item {
+                padding: 1rem;
+            }
+            
+            .timeline-item {
+                padding-left: 1rem;
+            }
+            
+            .section-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+  </head>
+
+  <body class="font-sans">
+    <!-- Table of Contents Sidebar -->
+    <nav class="toc-sidebar">
+      <div class="mb-8">
+        <h2 class="font-serif text-xl font-bold text-slate-800 mb-4">Tabla de Contenidos</h2>
+        <div class="space-y-2">
+          <a href="#hero" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Inicio</a>
+          <a href="#overview" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Resumen del Crucero</a>
+          <a href="#itinerary" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Itinerario Detallado</a>
+          <a href="#zadar" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 1: Zadar</a>
+          <a href="#dubrovnik" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 2: Dubrovnik</a>
+          <a href="#split" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 3: Split</a>
+          <a href="#kotor" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 4: Kotor</a>
+          <a href="#messina" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 6: Mesina</a>
+          <a href="#naples" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 7: Nápoles</a>
+          <a href="#livorno" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Días 9-10: Livorno</a>
+          <a href="#departure" class="block text-sm text-slate-600 hover:text-blue-600 transition-colors py-1">Día 11: Civitavecchia</a>
+        </div>
+      </div>
+
+      <div class="border-t pt-4">
+        <h3 class="font-semibold text-slate-700 mb-3">Información Útil</h3>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-center text-slate-600">
+            <i class="fas fa-ship w-4 mr-2"></i>
+            <span>Celebrity Constellation</span>
+          </div>
+          <div class="flex items-center text-slate-600">
+            <i class="fas fa-calendar w-4 mr-2"></i>
+            <span>28 Jul - 8 Ago 2025</span>
+          </div>
+          <div class="flex items-center text-slate-600">
+            <i class="fas fa-clock w-4 mr-2"></i>
+            <span>11 Noches</span>
+          </div>
+          <div class="flex items-center text-slate-600">
+            <i class="fas fa-users w-4 mr-2"></i>
+            <span>2,170 Pasajeros</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section id="hero" class="hero-bg">
+        <div id="vanta-bg" class="absolute inset-0"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content relative z-10 container mx-auto px-8 py-16">
+          <div class="max-w-4xl">
+            <h1 class="font-serif text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <span class="italic">Guía de Crucero</span>
+              <br/>
+              Lo Mejor de Italia y Croacia
+            </h1>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl">
+              Una experiencia de 11 noches a bordo del Celebrity Constellation, explorando las joyas del Mediterráneo desde Rávena hasta Roma
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                <div class="text-blue-100 text-sm">Fecha de Salida</div>
+                <div class="text-white font-semibold">28 de Julio 2025</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                <div class="text-blue-100 text-sm">Duración</div>
+                <div class="text-white font-semibold">11 Noches</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-sm rounded-lg px-6 py-3">
+                <div class="text-blue-100 text-sm">Puertos</div>
+                <div class="text-white font-semibold">7 Destinos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Overview Section -->
+      <section id="overview" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8 text-center">Resumen del Crucero</h2>
+
+            <div class="bento-grid">
+              <div class="bento-item">
+                <div class="flex items-center mb-4">
+                  <i class="fas fa-ship text-3xl text-blue-600 mr-4"></i>
+                  <div>
+                    <h3 class="font-serif text-xl font-semibold">Celebrity Constellation</h3>
+                    <p class="text-slate-600">Barco de clase Millennium</p>
+                  </div>
+                </div>
+                <p class="text-slate-700 mb-4">
+                  El Celebrity Constellation es un barco de 90,940 toneladas con capacidad para 2,170 pasajeros, inaugurado en 2002 y renovado recientemente para ofrecer una experiencia de &#34;club de campo en el mar&#34;.
+                  <a href="#ref-236" class="citation">236</a>
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span class="font-semibold">Eslora:</span> 294m
+                  </div>
+                  <div>
+                    <span class="font-semibold">Tripulación:</span> 1,022
+                  </div>
+                  <div>
+                    <span class="font-semibold">Cubiertas:</span> 11
+                  </div>
+                  <div>
+                    <span class="font-semibold">Camarotes:</span> 1,013
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-item">
+                <div class="flex items-center mb-4">
+                  <i class="fas fa-utensils text-3xl text-amber-600 mr-4"></i>
+                  <div>
+                    <h3 class="font-serif text-xl font-semibold">Gastronomía</h3>
+                    <p class="text-slate-600">Experiencias culinarias premium</p>
+                  </div>
+                </div>
+                <ul class="space-y-2 text-slate-700">
+                  <li class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-2"></i>
+                    Tuscan Grille - Cocina italiana premium
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-2"></i>
+                    Sushi on Five - Experiencia japonesa
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-2"></i>
+                    Le Petit Chef - Cena con proyección 3D
+                  </li>
+                  <li class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-2"></i>
+                    Martini Bar - Cócteles artesanales
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bento-item">
+                <div class="flex items-center mb-4">
+                  <i class="fas fa-spa text-3xl text-teal-600 mr-4"></i>
+                  <div>
+                    <h3 class="font-serif text-xl font-semibold">Instalaciones</h3>
+                    <p class="text-slate-600">Bienestar y entretenimiento</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm text-slate-700">
+                  <div class="space-y-2">
+                    <div>• The Spa</div>
+                    <div>• Solarium (adultos)</div>
+                    <div>• Piscinas múltiples</div>
+                    <div>• Gimnasio</div>
+                  </div>
+                  <div class="space-y-2">
+                    <div>• Teatro principal</div>
+                    <div>• Casino</div>
+                    <div>• Boutiques</div>
+                    <div>• Internet Starlink</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bento-item">
+                <div class="flex items-center mb-4">
+                  <i class="fas fa-info-circle text-3xl text-slate-600 mr-4"></i>
+                  <div>
+                    <h3 class="font-serif text-xl font-semibold">Información Importante</h3>
+                    <p class="text-slate-600">Detalles clave para el viaje</p>
+                  </div>
+                </div>
+                <div class="space-y-3 text-sm text-slate-700">
+                  <div>
+                    <span class="font-semibold">Moneda a bordo:</span> USD
+                    <a href="#ref-261" class="citation">261</a>
+                  </div>
+                  <div>
+                    <span class="font-semibold">Propinas:</span> $18-23 USD/persona/día
+                    <a href="#ref-172" class="citation">172</a>
+                  </div>
+                  <div>
+                    <span class="font-semibold">Idiomas:</span> Inglés, español, italiano
+                  </div>
+                  <div>
+                    <span class="font-semibold">Vestimenta:</span> Elegante casual
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Itinerary Overview -->
+      <section id="itinerary" class="py-16">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-12 text-center">Itinerario Detallado</h2>
+
+            <div class="overflow-x-auto">
+              <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+                <thead class="bg-slate-800 text-white">
+                  <tr>
+                    <th class="px-6 py-4 text-left font-semibold">Día</th>
+                    <th class="px-6 py-4 text-left font-semibold">Fecha</th>
+                    <th class="px-6 py-4 text-left font-semibold">Destino</th>
+                    <th class="px-6 py-4 text-left font-semibold">Llegada</th>
+                    <th class="px-6 py-4 text-left font-semibold">Salida</th>
+                    <th class="px-6 py-4 text-left font-semibold">Actividades Principales</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">1</td>
+                    <td class="px-6 py-4">Lun, 28 Jul</td>
+                    <td class="px-6 py-4 font-semibold">Rávena, Italia</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4">17:00</td>
+                    <td class="px-6 py-4 text-sm">Embarque</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">2</td>
+                    <td class="px-6 py-4">Mar, 29 Jul</td>
+                    <td class="px-6 py-4 font-semibold">Zadar, Croacia</td>
+                    <td class="px-6 py-4">08:00</td>
+                    <td class="px-6 py-4">17:00</td>
+                    <td class="px-6 py-4 text-sm">Órgano Marino, Saludo al Sol, casco antiguo</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">3</td>
+                    <td class="px-6 py-4">Mié, 30 Jul</td>
+                    <td class="px-6 py-4 font-semibold">Dubrovnik, Croacia</td>
+                    <td class="px-6 py-4">09:00</td>
+                    <td class="px-6 py-4">19:00</td>
+                    <td class="px-6 py-4 text-sm">Murallas, Stradun, teleférico</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">4</td>
+                    <td class="px-6 py-4">Jue, 31 Jul</td>
+                    <td class="px-6 py-4 font-semibold">Split, Croacia</td>
+                    <td class="px-6 py-4">08:00</td>
+                    <td class="px-6 py-4">18:00</td>
+                    <td class="px-6 py-4 text-sm">Palacio de Diocleciano, Riva</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">5</td>
+                    <td class="px-6 py-4">Vie, 01 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Kotor, Montenegro</td>
+                    <td class="px-6 py-4">08:00</td>
+                    <td class="px-6 py-4">18:00</td>
+                    <td class="px-6 py-4 text-sm">Casco antiguo, murallas, castillo</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors bg-slate-50">
+                    <td class="px-6 py-4 font-semibold text-slate-600">6</td>
+                    <td class="px-6 py-4">Sáb, 02 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Navegación</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4 text-sm">Actividades a bordo</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">7</td>
+                    <td class="px-6 py-4">Dom, 03 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Mesina, Italia</td>
+                    <td class="px-6 py-4">08:00</td>
+                    <td class="px-6 py-4">18:00</td>
+                    <td class="px-6 py-4 text-sm">Duomo, reloj astronómico, Taormina</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">8</td>
+                    <td class="px-6 py-4">Lun, 04 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Nápoles, Italia</td>
+                    <td class="px-6 py-4">08:00</td>
+                    <td class="px-6 py-4">19:00</td>
+                    <td class="px-6 py-4 text-sm">Castel Nuovo, Spaccanapoli, pizza</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors bg-slate-50">
+                    <td class="px-6 py-4 font-semibold text-slate-600">9</td>
+                    <td class="px-6 py-4">Mar, 05 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Navegación</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4 text-sm">Actividades a bordo</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">10-11</td>
+                    <td class="px-6 py-4">Mié-Jue, 06-07 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Livorno, Italia</td>
+                    <td class="px-6 py-4">07:00</td>
+                    <td class="px-6 py-4">17:00</td>
+                    <td class="px-6 py-4 text-sm">Pisa, Florencia, Toscana</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-blue-600">12</td>
+                    <td class="px-6 py-4">Vie, 08 Ago</td>
+                    <td class="px-6 py-4 font-semibold">Civitavecchia (Roma)</td>
+                    <td class="px-6 py-4">05:00</td>
+                    <td class="px-6 py-4">-</td>
+                    <td class="px-6 py-4 text-sm">Desembarque, visita a Roma</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 1: Zadar -->
+      <section id="zadar" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 1 - Martes, 29 de Julio 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Zadar, Croacia</h2>
+
+            <div class="grid lg:grid-cols-3 gap-8 mb-8">
+              <div class="lg:col-span-2">
+                <div class="section-card p-8 mb-8">
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Llegada y Desembarque</h3>
+                  <p class="text-slate-700 mb-4">
+                    El Celebrity Constellation llegará a Zadar el martes 29 de julio de 2025 a las 08:00 horas. El barco permanecerá atracado hasta las 17:00 horas, brindando aproximadamente 9 horas para explorar esta encantadora ciudad dálmata.
+                    <a href="#ref-283" class="citation">283</a>
+                  </p>
+
+                  <div class="highlight-box">
+                    <h4 class="font-semibold text-slate-800 mb-2">
+                      <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                      Transporte desde el puerto
+                    </h4>
+                    <p class="text-slate-700 text-sm">
+                      Los barcos atracan en el puerto de Gaženica, a 5 km del casco antiguo. Opciones de transporte:
+                      <a href="#ref-397" class="citation">397</a>
+                    </p>
+                    <ul class="mt-2 space-y-1 text-sm text-slate-600">
+                      <li>• Shuttle al centro: €12-15 ida y vuelta</li>
+                      <li>• Taxi: aprox. €25 (acordar precio antes)</li>
+                      <li>• Autobús #9 + #2/#4: 10 kunas (€1.20)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="section-card p-8">
+                  <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Atracciones Principales</h3>
+
+                  <div class="space-y-6">
+                    <div class="timeline-item">
+                      <h4 class="font-semibold text-slate-800 mb-2">Órgano Marino y Saludo al Sol</h4>
+                      <p class="text-slate-700 text-sm mb-2">
+                        El Órgano Marino de 70 metros utiliza las olas para crear melodías aleatorias, mientras que el Saludo al Sol es una instalación de paneles solares que crea un espectáculo de luces al anochecer.
+                        <a href="#ref-356" class="citation">356</a>
+                        <a href="#ref-357" class="citation">357</a>
+                      </p>
+                      <div class="flex items-center text-xs text-slate-500">
+                        <i class="fas fa-clock mr-1"></i>
+                        <span>Recomendado: Tarde (14:00-16:00)</span>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item">
+                      <h4 class="font-semibold text-slate-800 mb-2">Iglesia de San Donato</h4>
+                      <p class="text-slate-700 text-sm mb-2">
+                        Iglesia del siglo IX, uno de los monumentos más importantes de la arquitectura prerrománica en Dalmacia, ubicada en la Plaza del Foro Romano.
+                        <a href="#ref-306" class="citation">306</a>
+                      </p>
+                      <div class="flex items-center text-xs text-slate-500">
+                        <i class="fas fa-clock mr-1"></i>
+                        <span>Recomendado: Mañana (8:30-13:00)</span>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item">
+                      <h4 class="font-semibold text-slate-800 mb-2">Catedral de Santa Anastasia</h4>
+                      <p class="text-slate-700 text-sm mb-2">
+                        La catedral más grande de Dalmacia, de estilo románico. El campanario ofrece vistas panorámicas de 360° de la ciudad.
+                        <a href="#ref-306" class="citation">306</a>
+                        <a href="#ref-644" class="citation">644</a>
+                      </p>
+                      <div class="flex items-center text-xs text-slate-500">
+                        <i class="fas fa-euro-sign mr-1"></i>
+                        <span>Entrada: 2-3€ (15 kunas)</span>
+                      </div>
+                    </div>
+
+                    <div class="timeline-item">
+                      <h4 class="font-semibold text-slate-800 mb-2">Plaza Narodni Trg</h4>
+                      <p class="text-slate-700 text-sm mb-2">
+                        Plaza del Pueblo, corazón de la vida social y política de Zadar desde la Edad Media, rodeada de edificios históricos y cafés.
+                        <a href="#ref-400" class="citation">400</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="lg:col-span-1">
+                <div class="section-card p-6 mb-6">
+                  <h4 class="font-semibold text-slate-800 mb-4">Horario Recomendado</h4>
+                  <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center">
+                      <span class="font-medium">08:30 - 13:00</span>
+                      <span class="text-slate-600">Casco antiguo</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="font-medium">13:00 - 14:00</span>
+                      <span class="text-slate-600">Almuerzo</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="font-medium">14:00 - 16:00</span>
+                      <span class="text-slate-600">Riva y Órgano Marino</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <span class="font-medium">16:00 - 16:30</span>
+                      <span class="text-slate-600">Regreso al barco</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section-card p-6">
+                  <h4 class="font-semibold text-slate-800 mb-4">Información Práctica</h4>
+                  <div class="space-y-2 text-sm text-slate-700">
+                    <div class="flex items-center">
+                      <i class="fas fa-money-bill-wave text-green-500 mr-2 w-4"></i>
+                      <span>Moneda: Euro (€)</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-language text-blue-500 mr-2 w-4"></i>
+                      <span>Idioma: Croata</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-walking text-purple-500 mr-2 w-4"></i>
+                      <span>Zona peatonal</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-sun text-yellow-500 mr-2 w-4"></i>
+                      <span>Llevar protección solar</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 2: Dubrovnik -->
+      <section id="dubrovnik" class="py-16">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 2 - Miércoles, 30 de Julio 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Dubrovnik, Croacia</h2>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">La Perla del Adriático</h3>
+                <p class="text-slate-700 mb-6">
+                  Dubrovnik, declarada Patrimonio de la Humanidad por la UNESCO, es una de las ciudades medievales mejor conservadas del Mediterráneo. Su casco antiguo amurallado ofrece una experiencia única.
+                </p>
+
+                <div class="highlight-box">
+                  <h4 class="font-semibold text-slate-800 mb-2">
+                    <i class="fas fa-ticket-alt text-blue-600 mr-2"></i>
+                    Dubrovnik Pass
+                  </h4>
+                  <p class="text-slate-700 text-sm">
+                    Altamente recomendado adquirir el pase de 1 día que incluye:
+                  </p>
+                  <ul class="mt-2 space-y-1 text-sm text-slate-600">
+                    <li>• Murallas de la ciudad (normalmente 35€)</li>
+                    <li>• Fuerte Lovrijenac</li>
+                    <li>• Varios museos y atracciones</li>
+                  </ul>
+                </div>
+
+                <div class="mt-6">
+                  <h4 class="font-semibold text-slate-800 mb-3">Transporte desde el puerto</h4>
+                  <p class="text-slate-700 text-sm mb-3">
+                    El barco atraca en el puerto de Gruž, a 3-4 km del casco antiguo.
+                  </p>
+                  <div class="bg-slate-100 rounded-lg p-4">
+                    <p class="text-sm text-slate-700">
+                      <i class="fas fa-bus text-blue-600 mr-2"></i>
+                      Tomar las líneas de autobús <strong>1A o 1B</strong> hasta la Puerta de Pile (entrada principal al casco antiguo)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Itinerario Recomendado</h3>
+
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      1
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-slate-800">Puerta de Pile</h5>
+                      <p class="text-slate-600 text-sm">Entrada principal al casco antiguo amurallado</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      2
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-slate-800">Calle Stradun</h5>
+                      <p class="text-slate-600 text-sm">Arteria principal de la ciudad vieja, con la Fuente de Onofrio</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      3
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-slate-800">Murallas de Dubrovnik</h5>
+                      <p class="text-slate-600 text-sm">Paseo de 2 km con vistas panorámicas (1.5-2 horas)</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      4
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-slate-800">Plaza de la Luža</h5>
+                      <p class="text-slate-600 text-sm">Palacio de Sponza, Torre del Reloj, Iglesia de San Blas</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      5
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-slate-800">Teleférico SRD</h5>
+                      <p class="text-slate-600 text-sm">Vistas panorámicas del Monte Srd</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 3: Split -->
+      <section id="split" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 3 - Jueves, 31 de Julio 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Split, Croacia</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">El Palacio de Diocleciano</h3>
+                  <p class="text-slate-700 mb-4">
+                    Split es una ciudad donde la historia cobra vida. El impresionante Palacio de Diocleciano, construido en el siglo IV d.C., es un laberinto de calles, plazas y edificios donde la gente vive y trabaja desde hace siglos.
+                  </p>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Opciones de Entradas Combinadas</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span class="font-semibold">Ticket Azul:</span> 7€
+                        <br/>
+                        <span class="text-slate-600">Catedral, cripta, baptisterio</span>
+                      </div>
+                      <div>
+                        <span class="font-semibold">Ticket Verde:</span> 9.5€
+                        <br/>
+                        <span class="text-slate-600">Catedral, campanario, tesoro</span>
+                      </div>
+                      <div>
+                        <span class="font-semibold">Ticket Rojo:</span> 8€
+                        <br/>
+                        <span class="text-slate-600">Catedral, cripta, tesoro, baptisterio</span>
+                      </div>
+                      <div>
+                        <span class="font-semibold">Ticket Morado:</span> 11€
+                        <br/>
+                        <span class="text-slate-600">Todos los lugares</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="bg-slate-100 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Acceso Fácil</h4>
+                    <p class="text-slate-700 text-sm">
+                      El puerto de Split está muy cerca del centro histórico. Se puede llegar caminando en 10-15 minutos.
+                    </p>
+                  </div>
+
+                  <div class="space-y-2 text-sm text-slate-700">
+                    <div class="flex items-center">
+                      <i class="fas fa-clock text-blue-500 mr-2 w-4"></i>
+                      <span>08:00 - 18:00</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-walking text-green-500 mr-2 w-4"></i>
+                      <span>Zona peatonal</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-euro-sign text-purple-500 mr-2 w-4"></i>
+                      <span>Moneda: Euro</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Atracciones Principales</h3>
+                <div class="space-y-4">
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Peristilo</h4>
+                    <p class="text-slate-600 text-sm">Plaza central del palacio, uno de los lugares más fotografiados de Split</p>
+                  </div>
+                  <div class="border-l-4 border-amber-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Catedral de San Domnión</h4>
+                    <p class="text-slate-600 text-sm">Antiguo mausoleo del emperador Diocleciano, con campanario</p>
+                  </div>
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Paseo Marítimo Riva</h4>
+                    <p class="text-slate-600 text-sm">Centro neurálgico de la vida social, con cafés y restaurantes</p>
+                  </div>
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Parque Marjan</h4>
+                    <p class="text-slate-600 text-sm">Colina arbolada con senderos y miradores espectaculares</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Puertas del Palacio</h3>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                      A
+                    </div>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puerta de Oro</span>
+                      <span class="text-slate-600 text-sm block">Entrada monumental norte</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="bg-silver-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                      B
+                    </div>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puerta de Plata</span>
+                      <span class="text-slate-600 text-sm block">Entrada norte</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                      C
+                    </div>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puerta de Bronce</span>
+                      <span class="text-slate-600 text-sm block">Desde el paseo marítimo</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="bg-gray-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                      D
+                    </div>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puerta de Hierro</span>
+                      <span class="text-slate-600 text-sm block">Al mercado de la ciudad</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 4: Kotor -->
+      <section id="kotor" class="py-16">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 4 - Viernes, 1 de Agosto 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Kotor, Montenegro</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">La Joya del Adriático</h3>
+                  <p class="text-slate-700 mb-4">
+                    Kotor es famoso por su espectacular bahía (Boka Kotorska), descrita como el fiordo más al sur de Europa, y por su casco antiguo medieval declarado Patrimonio de la Humanidad por la UNESCO.
+                  </p>
+
+                  <div class="highlight-box">
+                    <h4 class="font-semibold text-slate-800 mb-2">
+                      <i class="fas fa-ship text-blue-600 mr-2"></i>
+                      Desembarque en Tender
+                    </h4>
+                    <p class="text-slate-700 text-sm">
+                      El barco estará anclado (&#34;in roadstead&#34;). El desembarque se realiza mediante botes lanzadera y depende de las condiciones climáticas.
+                      <a href="#ref-204" class="citation">204</a>
+                    </p>
+                  </div>
+
+                  <div class="mt-6">
+                    <h4 class="font-semibold text-slate-800 mb-3">Recomendaciones</h4>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                      <li class="flex items-center">
+                        <i class="fas fa-shoe-prints text-green-500 mr-2"></i>
+                        Calzado cómodo y antideslizante
+                      </li>
+                      <li class="flex items-center">
+                        <i class="fas fa-tint text-blue-500 mr-2"></i>
+                        Agua y protección solar
+                      </li>
+                      <li class="flex items-center">
+                        <i class="fas fa-euro-sign text-purple-500 mr-2"></i>
+                        Moneda: Euro (€)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <img src="https://kimi-web-img.moonshot.cn/img/twoupriders.com/5c75adc60cdc530dd0e22a3926d7aaab85522bc4.jpg" alt="Vista panorámica de la bahía de Kotor y su casco antiguo amurallado" class="w-full h-64 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="Kotor Montenegro bahía casco antiguo" referrerpolicy="no-referrer" data-modified="1" data-score="11586.00"/>
+
+                  <div class="bg-slate-100 rounded-lg p-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Distancia desde el muelle</h4>
+                    <p class="text-slate-700 text-sm">
+                      El muelle de los tenders está justo al lado de las murallas del casco antiguo, permitiendo acceso directo y fácil a la ciudad.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div class="section-card p-6">
+                <h3 class="font-serif text-xl font-semibold mb-4 text-slate-800">Casco Antiguo</h3>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-door-open text-blue-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puerta del Mar</span>
+                      <span class="text-slate-600 text-sm block">Entrada principal del siglo XVI</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-square text-amber-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Plaza de Armas</span>
+                      <span class="text-slate-600 text-sm block">Corazón de la ciudad vieja</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-church text-purple-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Catedral San Trifón</span>
+                      <span class="text-slate-600 text-sm block">Siglo XII, patrón de la ciudad</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-6">
+                <h3 class="font-serif text-xl font-semibold mb-4 text-slate-800">Murallas y Castillo</h3>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                  <h4 class="font-semibold text-red-800 mb-2">¡Aventura extrema!</h4>
+                  <p class="text-red-700 text-sm">
+                    Subida al Castillo de San Juan: más de 1,300 escalones, duración 1-2 horas. Vistas espectaculares pero camino empinado.
+                  </p>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-mountain text-green-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Castillo San Juan</span>
+                      <span class="text-slate-600 text-sm block">Vistas panorámicas</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-route text-orange-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Tramos alternativos</span>
+                      <span class="text-slate-600 text-sm block">Paseo por murallas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-6">
+                <h3 class="font-serif text-xl font-semibold mb-4 text-slate-800">Otros Puntos</h3>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-cross text-blue-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Iglesia San Lucas</span>
+                      <span class="text-slate-600 text-sm block">Siglo XII</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-heart text-red-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Nuestra Señora de la Salud</span>
+                      <span class="text-slate-600 text-sm block">Gospa od Zdravlja</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <i class="fas fa-bridge text-gray-600"></i>
+                    <div>
+                      <span class="font-semibold text-slate-800">Puente Río Škurda</span>
+                      <span class="text-slate-600 text-sm block">Puerta Norte</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 6: Messina -->
+      <section id="messina" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 6 - Domingo, 3 de Agosto 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Mesina, Sicilia, Italia</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Puerta de Entrada a Sicilia</h3>
+                  <p class="text-slate-700 mb-4">
+                    Mesina, situada en el extremo noreste de Sicilia, es una ciudad con una rica historia marcada por terremotos y conflictos, pero que conserva un encanto único y sirve como puerta de entrada a la región.
+                  </p>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-slate-800 mb-2">Itinerario Línea Azul</h4>
+                    <p class="text-slate-700 text-sm">
+                      Recorrido por el casco histórico siguiendo los puntos principales:
+                    </p>
+                  </div>
+
+                  <div class="space-y-2 text-sm text-slate-700">
+                    <div class="flex items-center">
+                      <i class="fas fa-clock text-blue-500 mr-2 w-4"></i>
+                      <span>08:00 - 18:00 (10 horas)</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-walking text-green-500 mr-2 w-4"></i>
+                      <span>Acceso a pie desde el puerto</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-euro-sign text-purple-500 mr-2 w-4"></i>
+                      <span>Moneda: Euro (€)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <img src="https://kimi-web-img.moonshot.cn/img/www.operabnb.com/131d45816af382891facede89d156bb3ee401f46.jpg" alt="Catedral de Mesina y su campanario con reloj astronómico" class="w-full h-64 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="Duomo di Messina campanile" referrerpolicy="no-referrer" data-modified="1" data-score="11595.00"/>
+
+                  <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-amber-800 mb-2">
+                      <i class="fas fa-clock text-amber-600 mr-2"></i>
+                      ¡Espectáculo del Reloj!
+                    </h4>
+                    <p class="text-amber-700 text-sm">
+                      El reloj astronómico del Campanile cobra vida al mediodía con figuras mecánicas. No te lo pierdas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Atracciones Principales</h3>
+
+                <div class="space-y-4">
+                  <div class="timeline-item">
+                    <h4 class="font-semibold text-slate-800 mb-2">Duomo di Messina</h4>
+                    <p class="text-slate-700 text-sm">
+                      Catedral del siglo XII reconstruida, ejemplo de arquitectura normanda con influencias árabes y bizantinas.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <h4 class="font-semibold text-slate-800 mb-2">Campanile y Reloj Astronómico</h4>
+                    <p class="text-slate-700 text-sm">
+                      El reloj astronómico más grande y complejo del mundo, con espectáculo diario al mediodía.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <h4 class="font-semibold text-slate-800 mb-2">Fontana di Orione</h4>
+                    <p class="text-slate-700 text-sm">
+                      Hermosa fuente renacentista del siglo XVI ubicada en la Piazza Duomo.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <h4 class="font-semibold text-slate-800 mb-2">Fontana di Nettuno</h4>
+                    <p class="text-slate-700 text-sm">
+                      Fuente de Neptuno situada cerca del puerto, obra del escultor Montorsoli.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <h4 class="font-semibold text-slate-800 mb-2">Iglesia Santissima Annunziata</h4>
+                    <p class="text-slate-700 text-sm">
+                      Iglesia normanda del siglo XII con influencias árabes y bizantinas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Excursiones Opcionales</h3>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                  <h4 class="font-semibold text-green-800 mb-2">
+                    <i class="fas fa-mountain text-green-600 mr-2"></i>
+                    Taormina
+                  </h4>
+                  <p class="text-green-700 text-sm mb-2">
+                    Encantadora ciudad medieval en colina con vistas al mar y al Monte Etna. Tiempo de viaje en tren: ~45 minutos.
+                  </p>
+                  <div class="text-xs text-green-600">
+                    <i class="fas fa-train mr-1"></i>
+                    Tren a Taormina-Giardini + autobús/taxi
+                  </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <h4 class="font-semibold text-blue-800 mb-2">
+                    <i class="fas fa-island-tropical text-blue-600 mr-2"></i>
+                    Isla Bella
+                  </h4>
+                  <p class="text-blue-700 text-sm mb-2">
+                    Pequeña isla pintoresca conectada a la costa por un istmo de arena, cerca de Taormina.
+                  </p>
+                  <div class="text-xs text-blue-600">
+                    <i class="fas fa-water mr-1"></i>
+                    Belleza natural y playas
+                  </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                  <h4 class="font-semibold text-slate-800 mb-2">Recomendación</h4>
+                  <p class="text-slate-700 text-sm">
+                    Si viajas de forma independiente, gestiona bien los tiempos de traslado para regresar al barco. Las excursiones organizadas incluyen transporte garantizado.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 7: Naples -->
+      <section id="naples" class="py-16">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 7 - Lunes, 4 de Agosto 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Nápoles, Italia</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">La Ciudad del Sol</h3>
+                  <p class="text-slate-700 mb-4">
+                    Nápoles es una ciudad con un patrimonio histórico y cultural inigualable. Fundada por los griegos en el siglo VIII a.C., es una de las ciudades más antiguas de Europa y cuna de la pizza napolitana.
+                  </p>
+
+                  <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-red-800 mb-2">
+                      <i class="fas fa-pizza-slice text-red-600 mr-2"></i>
+                      ¡Cuna de la Pizza!
+                    </h4>
+                    <p class="text-red-700 text-sm">
+                      No te vayas de Nápoles sin probar una auténtica pizza napolitana. La pizza margherita fue creada aquí en 1889 en honor a la reina Margherita de Saboya.
+                    </p>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <span class="font-semibold">Horario:</span> 08:00 - 19:00
+                      <br/>
+                      <span class="font-semibold">Duración:</span> 11 horas
+                    </div>
+                    <div>
+                      <span class="font-semibold">Moneda:</span> Euro (€)
+                      <br/>
+                      <span class="font-semibold">Idioma:</span> Italiano
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/f367ce22ca1b82960ee7341a42292faaa35adb07.jpg" alt="Vista panorámica del golfo de Nápoles con el Monte Vesubio al fondo" class="w-full h-48 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="Golfo de Nápoles Monte Vesubio" referrerpolicy="no-referrer" data-modified="1" data-score="11597.00"/>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">Acceso Fácil</h4>
+                    <p class="text-blue-700 text-sm">
+                      El puerto está cerca del centro histórico. Se puede llegar a pie o mediante transporte público a las principales atracciones.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Mañana: Centro Histórico</h3>
+
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      1
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Castel Nuovo (Maschio Angioino)</h4>
+                      <p class="text-slate-600 text-sm">Castillo medieval del siglo XIII que domina el puerto, con Museo Cívico</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      2
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Galería Umberto I</h4>
+                      <p class="text-slate-600 text-sm">Espectacular galería comercial del siglo XIX con cúpula de cristal</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      3
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Piazza del Plebiscito</h4>
+                      <p class="text-slate-600 text-sm">Una de las plazas más grandes de Italia, con Basílica de San Francisco y Palacio Real</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      4
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Castel dell&#39;Ovo</h4>
+                      <p class="text-slate-600 text-sm">Antiguo castillo en el islote de Megaride (si hay tiempo)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Tarde: Spaccanapoli</h3>
+
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      1
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Spaccanapoli</h4>
+                      <p class="text-slate-600 text-sm">Antiguo decumano romano que &#34;parte&#34; Nápoles en dos</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      2
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Iglesia del Gesù Nuovo</h4>
+                      <p class="text-slate-600 text-sm">Fachada de piedra almohadillada única</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      3
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Basílica de Santa Chiara</h4>
+                      <p class="text-slate-600 text-sm">Famosa por su hermoso claustro mayólico</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      4
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Mural de Maradona</h4>
+                      <p class="text-slate-600 text-sm">Homenaje al ídolo argentino en los Quartieri Spagnoli</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start space-x-3">
+                    <div class="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-1">
+                      5
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-slate-800">Catedral de Nápoles</h4>
+                      <p class="text-slate-600 text-sm">Duomo di San Gennaro, con la capilla del Tesoro</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-card p-8 mt-8">
+              <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Información Práctica</h3>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                  <h4 class="font-semibold text-slate-800 mb-2">Transporte</h4>
+                  <ul class="space-y-1 text-sm text-slate-700">
+                    <li>• Metro (Líneas 1 y 2)</li>
+                    <li>• Autobuses urbanos</li>
+                    <li>• Funiculares</li>
+                    <li>• Taxis</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-800 mb-2">Seguridad</h4>
+                  <ul class="space-y-1 text-sm text-slate-700">
+                    <li>• Cuidado con carteristas</li>
+                    <li>• Evitar calles solitarias</li>
+                    <li>• Guardar documentos</li>
+                    <li>• Atención en transporte</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-slate-800 mb-2">Gastronomía</h4>
+                  <ul class="space-y-1 text-sm text-slate-700">
+                    <li>• Pizza napolitana</li>
+                    <li>• Pasta alla Norma</li>
+                    <li>• Ragù napoletano</li>
+                    <li>• Sfogliatelle (dulce)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 9-10: Livorno -->
+      <section id="livorno" class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Días 9-10 - Miércoles-Jueves, 6-7 de Agosto 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Livorno, Italia (Escala de 2 días)</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Puerta de Entrada a la Toscana</h3>
+                  <p class="text-slate-700 mb-4">
+                    Livorno es un importante puerto de la Toscana que sirve como base perfecta para explorar las joyas culturales de la región, incluyendo Pisa y Florencia.
+                  </p>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                      <i class="fas fa-calendar-alt text-blue-600 mr-2"></i>
+                      Escala de 2 Días
+                    </h4>
+                    <p class="text-blue-700 text-sm">
+                      Llegada: Miércoles 6 de agosto a las 07:00
+                      <br/>
+                      Salida: Jueves 7 de agosto a las 17:00
+                      <a href="#ref-172" class="citation">172</a>
+                      <a href="#ref-204" class="citation">204</a>
+                    </p>
+                  </div>
+
+                  <div class="space-y-2 text-sm text-slate-700">
+                    <div class="flex items-center">
+                      <i class="fas fa-euro-sign text-purple-500 mr-2 w-4"></i>
+                      <span>Moneda: Euro (€)</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-language text-blue-500 mr-2 w-4"></i>
+                      <span>Idioma: Italiano</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <img src="https://kimi-web-img.moonshot.cn/img/www.sacarciudadaniaitaliana.com/6f11fbae9a2293d6743917129e6f42f9a57faf16.jpg" alt="Vista de la Torre de Pisa inclinada en el conjunto monumental de la Piazza dei Miracoli" class="w-full h-64 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="Torre de Pisa" referrerpolicy="no-referrer" data-modified="1" data-score="11594.00"/>
+
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">Transporte desde el Puerto</h4>
+                    <p class="text-green-700 text-sm">
+                      Autobús líneas 1 o 2 hasta Livorno Centrale, luego tren a Pisa o Florencia.
+                      <a href="#ref-199" class="citation">199</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Día 1: Excursión a Pisa</h3>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                  <h4 class="font-semibold text-amber-800 mb-2">
+                    <i class="fas fa-train text-amber-600 mr-2"></i>
+                    Viaje en Tren
+                  </h4>
+                  <p class="text-amber-700 text-sm">
+                    Livorno Centrale → Pisa Centrale: 15-20 minutos
+                    <a href="#ref-199" class="citation">199</a>
+                  </p>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Piazza dei Miracoli</h4>
+                    <p class="text-slate-600 text-sm mb-2">Entrada por Porta Nuova</p>
+                    <ul class="text-xs text-slate-500 space-y-1">
+                      <li>• Torre de Pisa (entradas con antelación)</li>
+                      <li>• Catedral de Santa Maria Asunta</li>
+                      <li>• Baptisterio</li>
+                      <li>• Camposanto Monumental</li>
+                    </ul>
+                  </div>
+
+                  <div class="border-l-4 border-green-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Centro Histórico</h4>
+                    <ul class="text-xs text-slate-500 space-y-1">
+                      <li>• Vía Santa Maria</li>
+                      <li>• Piazza del Cavalieri</li>
+                      <li>• Borgo Stretto (calles comerciales)</li>
+                      <li>• Río Arno y Ponte di Mezzo</li>
+                      <li>• Iglesia de Santa Maria della Spina</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                  <p class="text-slate-700 text-sm">
+                    <i class="fas fa-clock text-blue-500 mr-2"></i>
+                    Tiempo estimado en Piazza dei Miracoli: 105 minutos
+                    <a href="#ref-199" class="citation">199</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Día 2: Opciones Disponibles</h3>
+
+                <div class="space-y-4">
+                  <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-red-800 mb-2">
+                      <i class="fas fa-landmark text-red-600 mr-2"></i>
+                      Florencia (Recomendado)
+                    </h4>
+                    <p class="text-red-700 text-sm mb-2">
+                      Capital del Renacimiento. Tiempo de viaje: ~1h 20m en tren.
+                    </p>
+                    <div class="text-xs text-red-600 space-y-1">
+                      <div>• Duomo (Catedral Santa Maria del Fiore)</div>
+                      <div>• Galería de la Academia (David de Miguel Ángel)</div>
+                      <div>• Galería Uffizi</div>
+                      <div>• Ponte Vecchio</div>
+                      <div>• Piazza della Signoria</div>
+                    </div>
+                  </div>
+
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">
+                      <i class="fas fa-city text-green-600 mr-2"></i>
+                      Lucca
+                    </h4>
+                    <p class="text-green-700 text-sm mb-2">
+                      Ciudad amurallada con encantador centro histórico. ~1h en tren.
+                    </p>
+                    <div class="text-xs text-green-600 space-y-1">
+                      <div>• Murallas renacentistas</div>
+                      <div>• Piazza dell&#39;Anfiteatro</div>
+                      <div>• Torre Guinigi</div>
+                      <div>• Catedral de San Martín</div>
+                    </div>
+                  </div>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                      <i class="fas fa-anchor text-blue-600 mr-2"></i>
+                      Explorar Livorno
+                    </h4>
+                    <p class="text-blue-700 text-sm mb-2">
+                      Descubrir la propia ciudad de Livorno.
+                    </p>
+                    <div class="text-xs text-blue-600 space-y-1">
+                      <div>• Fossi Medicei (canales)</div>
+                      <div>• Mercato Centrale</div>
+                      <div>• Terrazza Mascagni</div>
+                      <div>• Barrio &#34;Nuova Venezia&#34;</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Day 11: Departure -->
+      <section id="departure" class="py-16">
+        <div class="container mx-auto px-8">
+          <div class="max-w-6xl mx-auto">
+            <div class="day-badge">Día 11 - Viernes, 8 de Agosto 2025</div>
+            <h2 class="font-serif text-4xl font-bold text-slate-800 mb-8">Civitavecchia (Roma) y Viaje de Regreso</h2>
+
+            <div class="section-card p-8 mb-8">
+              <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-4 text-slate-800">Fin del Crucero</h3>
+                  <p class="text-slate-700 mb-4">
+                    El Celebrity Constellation llegará al puerto de Civitavecchia (puerto de Roma) a las 05:00 horas. Civitavecchia está situada a unos 80 km al noroeste de Roma, lo que permite una breve visita a la Ciudad Eterna antes del vuelo de regreso.
+                    <a href="#ref-172" class="citation">172</a>
+                    <a href="#ref-204" class="citation">204</a>
+                  </p>
+
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">
+                      <i class="fas fa-plane text-blue-600 mr-2"></i>
+                      Vuelo de Regreso
+                    </h4>
+                    <p class="text-blue-700 text-sm">
+                      <strong>FR9601 Ryanair</strong>
+                      <br/>
+                      Roma Fiumicino (FCO) → Madrid
+                      <br/>
+                      Salida: 17:05 - Llegada: 19:25
+                      <br/>
+                      Duración: 2h 20m
+                    </p>
+                  </div>
+
+                  <div class="space-y-2 text-sm text-slate-700">
+                    <div class="flex items-center">
+                      <i class="fas fa-clock text-red-500 mr-2 w-4"></i>
+                      <span>Llegada barco: 05:00</span>
+                    </div>
+                    <div class="flex items-center">
+                      <i class="fas fa-euro-sign text-purple-500 mr-2 w-4"></i>
+                      <span>Moneda: Euro (€)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <img src="https://kimi-web-img.moonshot.cn/img/www.luxuriousmagazine.com/648b7942665609e48ea32bd40d34e07fce7912e9.jpg" alt="Estación de tren Roma Termini" class="w-full h-64 object-cover rounded-lg mb-4" size="medium" aspect="wide" style="photo" query="Roma Termini" referrerpolicy="no-referrer" data-modified="1" data-score="11484.00"/>
+
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">Tiempo Disponible</h4>
+                    <p class="text-green-700 text-sm">
+                      Vuelo a las 17:05 → Check-in a las 14:05
+                      <br/>
+                      Tiempo útil: ~9 horas (considerando traslados)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Traslado a Roma</h3>
+
+                <div class="space-y-4">
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2">Opción 1: Tren</h4>
+                    <p class="text-blue-700 text-sm mb-2">
+                      <strong>Civitavecchia → Roma Termini</strong>
+                      <br/>
+                      Trenes Regionales: 1h 15m - 1h 30m
+                      <br/>
+                      Precio: €5-10
+                      <br/>
+                      Frecuencia: Cada 30-60 minutos
+                    </p>
+                    <p class="text-blue-700 text-sm mb-2">
+                      <strong>Roma Termini → Aeropuerto Fiumicino</strong>
+                      <br/>
+                      Leonardo Express: 30 minutos
+                      <br/>
+                      Precio: €14
+                    </p>
+                  </div>
+
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 mb-2">Opción 2: Traslado Directo</h4>
+                    <p class="text-green-700 text-sm">
+                      Servicios de autobús directo o traslado privado (taxi/miniván) desde Civitavecchia al aeropuerto. Más caro pero más conveniente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card p-8">
+                <h3 class="font-serif text-2xl font-semibold mb-6 text-slate-800">Visita Rápida a Roma</h3>
+
+                <div class="space-y-4">
+                  <div class="border-l-4 border-red-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Opción Centro Histórico</h4>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                      <li>• Fontana di Trevi</li>
+                      <li>• Panteón</li>
+                      <li>• Piazza Navona</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-2">Cerca entre sí, acceso gratuito</p>
+                  </div>
+
+                  <div class="border-l-4 border-purple-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Opción Vaticano</h4>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                      <li>• Basílica de San Pedro</li>
+                      <li>• Plaza de San Pedro</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-2">Posibles colas, acceso gratuito a la basílica</p>
+                  </div>
+
+                  <div class="border-l-4 border-amber-500 pl-4">
+                    <h4 class="font-semibold text-slate-800">Opción Arqueológica</h4>
+                    <ul class="text-sm text-slate-600 space-y-1">
+                      <li>• Coliseo</li>
+                      <li>• Foro Romano</li>
+                      <li>• Palatino</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 mt-2">Requiere entradas con horario, más tiempo</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                  <p class="text-slate-700 text-sm">
+                    <i class="fas fa-exclamation-triangle text-amber-500 mr-2"></i>
+                    <strong>Importante:</strong> Gestionar bien los tiempos. Llegar al aeropuerto 3 horas antes del vuelo. Ryanair fomenta check-in online.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- References -->
+      <section class="py-16 bg-slate-50">
+        <div class="container mx-auto px-8">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-slate-800 mb-8">Referencias</h2>
+            <div class="grid gap-4 text-sm">
+              <div id="ref-11" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[11]</span>
+                <span class="text-slate-700">Información de vuelo W4 6730 Madrid-Venecia - <a href="https://aviability.com/en/flight/w46730-wizz-air-malta" class="text-blue-600 hover:underline">aviability.com</a></span>
+              </div>
+              <div id="ref-19" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[19]</span>
+                <span class="text-slate-700">Horario autobús FlixBus Venecia-Rávena - <a href="https://www.omio.com/buses/venice/ravenna-voxhy" class="text-blue-600 hover:underline">omio.com</a></span>
+              </div>
+              <div id="ref-25" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[25]</span>
+                <span class="text-slate-700">Número de confirmación FlixBus - <a href="https://help.flixbus.com/s/article/PSSP-Where-can-I-find-my-booking-number?" class="text-blue-600 hover:underline">help.flixbus.com</a></span>
+              </div>
+              <div id="ref-26" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[26]</span>
+                <span class="text-slate-700">Localizador de reserva FlixBus - <a href="https://help.flixbus.com/s/article/PSSP-Where-can-I-find-my-booking-number?language=en_CA" class="text-blue-600 hover:underline">help.flixbus.com</a></span>
+              </div>
+              <div id="ref-29" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[29]</span>
+                <span class="text-slate-700">Servicios FlixBus - <a href="https://global.flixbus.com/bus-routes/bus-venice-ravenna" class="text-blue-600 hover:underline">global.flixbus.com</a></span>
+              </div>
+              <div id="ref-30" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[30]</span>
+                <span class="text-slate-700">Reserva FlixBus - <a href="https://www.flixbus.com/bus/ravenna" class="text-blue-600 hover:underline">flixbus.com</a></span>
+              </div>
+              <div id="ref-55" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[55]</span>
+                <span class="text-slate-700">Traslado Ravenna-Porto Corsini - <a href="https://www.ravennaexperience.it/en_GB/activity/326037/transfer-from-ravenna-city-to-cruise-terminal" class="text-blue-600 hover:underline">ravennaexperience.it</a></span>
+              </div>
+              <div id="ref-57" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[57]</span>
+                <span class="text-slate-700">Opciones de transporte Ravenna - <a href="https://www.rome2rio.com/s/B-B-Hotel-Ravenna/Porto-Corsini" class="text-blue-600 hover:underline">rome2rio.com</a></span>
+              </div>
+              <div id="ref-63" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[63]</span>
+                <span class="text-slate-700">B&amp;B Hotel Ravenna - <a href="https://www.expedia.ca/Ravenna-Hotels.d9642.Travel-Guide-Hotels" class="text-blue-600 hover:underline">expedia.ca</a></span>
+              </div>
+              <div id="ref-67" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[67]</span>
+                <span class="text-slate-700">Información B&amp;B Hotel Ravenna - <a href="https://www.trivago.com/en-US/oar/b-b-hotel-ravenna?search=100-24411;101-53" class="text-blue-600 hover:underline">trivago.com</a></span>
+              </div>
+              <div id="ref-69" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[69]</span>
+                <span class="text-slate-700">Detalles B&amp;B Hotel - <a href="https://www.safaraq.com/en/hotels/128456?destination=&amp;occupancies=2-0&amp;check_in=2025-07-20&amp;check_out=2025-07-23" class="text-blue-600 hover:underline">safaraq.com</a></span>
+              </div>
+              <div id="ref-80" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[80]</span>
+                <span class="text-slate-700">Guía del puerto de Ravenna - <a href="https://about2cruise.co.uk/ravenna-cruise-ship-port-guide/" class="text-blue-600 hover:underline">about2cruise.co.uk</a></span>
+              </div>
+              <div id="ref-89" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[89]</span>
+                <span class="text-slate-700">Transporte estación-puerto Ravenna - <a href="https://www.tripadvisor.com/ShowTopic-g187806-i1784-k14459226-o10-Transportation_from_Train_Station_to_Cruise_Port-Ravenna_Province_of_Ravenna_Emilia_Ro.html" class="text-blue-600 hover:underline">tripadvisor.com</a></span>
+              </div>
+              <div id="ref-90" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[90]</span>
+                <span class="text-slate-700">Servicios B&amp;B Hotel Ravenna - <a href="https://www.expedia.ca/Ravenna-Hotels.d9642.Travel-Guide-Hotels" class="text-blue-600 hover:underline">expedia.ca</a></span>
+              </div>
+              <div id="ref-95" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[95]</span>
+                <span class="text-slate-700">Autobús línea 90 Ravenna - <a href="https://moovitapp.com/index/en/public_transit-Porto_Corsini-Bologna_e_Romagna-site_16487657-1783" class="text-blue-600 hover:underline">moovitapp.com</a></span>
+              </div>
+              <div id="ref-107" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[107]</span>
+                <span class="text-slate-700">Traslados Celebrity Cruises - <a href="https://diycruiseports.com/embarkation/bologna-to-ravenna-cruise-port-transfers" class="text-blue-600 hover:underline">diycruiseports.com</a></span>
+              </div>
+              <div id="ref-110" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[110]</span>
+                <span class="text-slate-700">Ruta autobús 296 - <a href="https://www.rome2rio.com/s/B-B-Ravenna/Porto-Corsini" class="text-blue-600 hover:underline">rome2rio.com</a></span>
+              </div>
+              <div id="ref-111" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[111]</span>
+                <span class="text-slate-700">Opciones de transporte - <a href="https://www.rome2rio.com/s/B-B-Hotel-Ravenna/Porto-Corsini" class="text-blue-600 hover:underline">rome2rio.com</a></span>
+              </div>
+              <div id="ref-118" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[118]</span>
+                <span class="text-slate-700">Horarios autobús 296 - <a href="https://moovitapp.com/index/en/public_transit-line-296-Bologna_e_Romagna-1783-854770-300167-0" class="text-blue-600 hover:underline">moovitapp.com</a></span>
+              </div>
+              <div id="ref-120" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[120]</span>
+                <span class="text-slate-700">Traslado hotel-puerto Ravenna - <a href="https://www.visitravenna.it/en/transfer-da-ravenna-citt-al-terminal-crociere-di-porto-corsini" class="text-blue-600 hover:underline">visitravenna.it</a></span>
+              </div>
+              <div id="ref-121" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[121]</span>
+                <span class="text-slate-700">Servicio lanzadera Ravenna - <a href="https://www.visitravenna.it/en/transfer-ar-da-ravenna-centro-al-terminal--dal-terminal-alla-stazione-fs-dei-treni-di-ravenna" class="text-blue-600 hover:underline">visitravenna.it</a></span>
+              </div>
+              <div id="ref-122" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[122]</span>
+                <span class="text-slate-700">Precios traslado Ravenna - <a href="https://www.ravennaexperience.it/en_GB/activity/326038/round-trip-transfer-from-ravenna-centre-to-terminal-from-terminal-to-ravenna-train-station" class="text-blue-600 hover:underline">ravennaexperience.it</a></span>
+              </div>
+              <div id="ref-125" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[125]</span>
+                <span class="text-slate-700">Autobús línea 90 - <a href="https://moovitapp.com/index/en/public_transit-Porto_Corsini-Bologna_e_Romagna-site_16487657-1783" class="text-blue-600 hover:underline">moovitapp.com</a></span>
+              </div>
+              <div id="ref-129" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[129]</span>
+                <span class="text-slate-700">Instrucciones autobús 90 - <a href="https://www.roamingrequired.com/ravenna-train-station-to-porto-corsini-by-bus/" class="text-blue-600 hover:underline">roamingrequired.com</a></span>
+              </div>
+              <div id="ref-161" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[161]</span>
+                <span class="text-slate-700">Itinerario Celebrity Constellation - <a href="https://www.celebritycruises.com/au/itinerary-details/11-night-best-of-italy-croatia-cruise-from-ravenna-italy?packageID=CS11M286" class="text-blue-600 hover:underline">celebritycruises.com</a></span>
+              </div>
+              <div id="ref-162" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[162]</span>
+                <span class="text-slate-700">Reserva de crucero - <a href="https://www.iglucruise.com/celebrity-constellation/28th-july-2025_c350106" class="text-blue-600 hover:underline">iglucruise.com</a></span>
+              </div>
+              <div id="ref-166" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[166]</span>
+                <span class="text-slate-700">Incluido en el crucero - <a href="https://www.planetcruise.com/en/celebrity-cruises/celebrity-constellation/28-july-2025/350106" class="text-blue-600 hover:underline">planetcruise.com</a></span>
+              </div>
+              <div id="ref-168" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[168]</span>
+                <span class="text-slate-700">Detalles de la reserva - <a href="https://m.icruise.com/cm/itinIncluded.php?CID=13931383" class="text-blue-600 hover:underline">icruise.com</a></span>
+              </div>
+              <div id="ref-170" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[170]</span>
+                <span class="text-slate-700">Itinerario 11 noches - <a href="https://www.celebritycruises.com/itinerary/11-night-best-of-italy-croatia-from-ravenna-on-constellation-CS11M286" class="text-blue-600 hover:underline">celebritycruises.com</a></span>
+              </div>
+              <div id="ref-172" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[172]</span>
+                <span class="text-slate-700">Detalles del crucero - <a href="https://cruisepanda.com/cruise/11-night-cruise-on-celebrity-constellation-56874" class="text-blue-600 hover:underline">cruisepanda.com</a></span>
+              </div>
+              <div id="ref-199" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[199]</span>
+                <span class="text-slate-700">Excursión a Pisa desde Livorno - <a href="https://www.travelersuniverse.com/from-livorno-day-trip-to-pisa-and-cinque-terres-manarola/" class="text-blue-600 hover:underline">travelersuniverse.com</a></span>
+              </div>
+              <div id="ref-200" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[200]</span>
+                <span class="text-slate-700">Excursión a Florencia y Pisa - <a href="https://www.viator.com/tours/Livorno/Livorno-to-Florence-and-Pisa-Day-Trip-with-Cruise-Port-Pickup/d22138-5519972P18" class="text-blue-600 hover:underline">viator.com</a></span>
+              </div>
+              <div id="ref-204" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[204]</span>
+                <span class="text-slate-700">Información del crucero - <a href="https://www.seascanner.com/cruise-k245379-mediterranean-celebrity-constellation-ravenna-civitavecchia-rome" class="text-blue-600 hover:underline">seascanner.com</a></span>
+              </div>
+              <div id="ref-236" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[236]</span>
+                <span class="text-slate-700">Review Celebrity Constellation - <a href="https://cruisefever.net/0306-celebrity-constellation-cruise-ship-review-and-video-tour/" class="text-blue-600 hover:underline">cruisefever.net</a></span>
+              </div>
+              <div id="ref-244" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[244]</span>
+                <span class="text-slate-700">Servicios a bordo - <a href="https://www.celebritycruises.com/itinerary/11-night-best-of-italy-croatia-from-ravenna-on-constellation-CS11M286" class="text-blue-600 hover:underline">celebritycruises.com</a></span>
+              </div>
+              <div id="ref-260" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[260]</span>
+                <span class="text-slate-700">Capacidad Celebrity Constellation - <a href="https://www.cruisecritic.com/articles/what-is-the-biggest-celebrity-ship" class="text-blue-600 hover:underline">cruisecritic.com</a></span>
+              </div>
+              <div id="ref-261" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[261]</span>
+                <span class="text-slate-700">Datos técnicos barco - <a href="https://www.cruise118.com/cruise-line/celebrity-cruises/celebrity-constellation" class="text-blue-600 hover:underline">cruise118.com</a></span>
+              </div>
+              <div id="ref-283" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[283]</span>
+                <span class="text-slate-700">Horario puerto Zadar - <a href="https://www.cruisetimetables.com/celebritycruises-28jul2025.html" class="text-blue-600 hover:underline">cruisetimetables.com</a></span>
+              </div>
+              <div id="ref-306" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[306]</span>
+                <span class="text-slate-700">Atracciones Zadar - <a href="https://www.planetware.com/tourist-attractions-/zadar-hr-da-z.htm" class="text-blue-600 hover:underline">planetware.com</a></span>
+              </div>
+              <div id="ref-340" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[340]</span>
+                <span class="text-slate-700">Puerto Gaženica Zadar - <a href="https://www.alamy.com/port-zadar-croatia-image546212240.html" class="text-blue-600 hover:underline">alamy.com</a></span>
+              </div>
+              <div id="ref-355" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[355]</span>
+                <span class="text-slate-700">Saludo al Sol Zadar - <a href="https://www.tripadvisor.com/Attraction_Review-g295374-d3369267-Reviews-Greeting_to_the_Sun-Zadar_Zadar_County_Dalmatia.html" class="text-blue-600 hover:underline">tripadvisor.com</a></span>
+              </div>
+              <div id="ref-356" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[356]</span>
+                <span class="text-slate-700">Órgano Marino Zadar - <a href="https://www.adriaticluxuryvillas.com/blog/sea-organ-and-greeting-to-the-sun-in-zadar" class="text-blue-600 hover:underline">adriaticluxuryvillas.com</a></span>
+              </div>
+              <div id="ref-357" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[357]</span>
+                <span class="text-slate-700">Órgano Marino y Saludo al Sol - <a href="https://hostelforumzadar.com/en/blog/26/greeting-the-sun-with-the-sound-of-sea-organ" class="text-blue-600 hover:underline">hostelforumzadar.com</a></span>
+              </div>
+              <div id="ref-376" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[376]</span>
+                <span class="text-slate-700">Foro Romano Zadar - <a href="https://expo-f.com/zadar-attractions/" class="text-blue-600 hover:underline">expo-f.com</a></span>
+              </div>
+              <div id="ref-397" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[397]</span>
+                <span class="text-slate-700">Guía puerto Zadar - <a href="https://www.telegraph.co.uk/travel/cruises/port-guides/zadar-cruise-port-guide/" class="text-blue-600 hover:underline">telegraph.co.uk</a></span>
+              </div>
+              <div id="ref-398" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[398]</span>
+                <span class="text-slate-700">Gastronomía Zadar - <a href="https://www.zadarcruiseport.com/" class="text-blue-600 hover:underline">zadarcruiseport.com</a></span>
+              </div>
+              <div id="ref-399" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[399]</span>
+                <span class="text-slate-700">Información turística Zadar - <a href="https://www.cunard.com/en-us/ports/zadar-croatia" class="text-blue-600 hover:underline">cunard.com</a></span>
+              </div>
+              <div id="ref-400" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[400]</span>
+                <span class="text-slate-700">Plaza Narodni Zadar - <a href="https://www.travelisbeautiful.com/zadar" class="text-blue-600 hover:underline">travelisbeautiful.com</a></span>
+              </div>
+              <div id="ref-443" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[443]</span>
+                <span class="text-slate-700">Consejos para visitar Dubrovnik - <a href="https://www.mywanderlust.pl/visit-dubrovnik-croatia-pictures/" class="text-blue-600 hover:underline">mywanderlust.pl</a></span>
+              </div>
+              <div id="ref-641" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[641]</span>
+                <span class="text-slate-700">Catedral Santa Anastasia - <a href="https://www.zadar4fun.com/cathedral-of-st-anastasia-zadar" class="text-blue-600 hover:underline">zadar4fun.com</a></span>
+              </div>
+              <div id="ref-644" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[644]</span>
+                <span class="text-slate-700">Campanario Zadar - <a href="https://www.tomhentystravel.co.uk/balkans/climbing-the-bell-tower-in-zadar-in-croatia" class="text-blue-600 hover:underline">tomhentystravel.co.uk</a></span>
+              </div>
+              <div id="ref-657" class="flex">
+                <span class="font-semibold text-slate-600 mr-2">[657]</span>
+                <span class="text-slate-700">Visitas guiadas Zadar - <a href="https://girlswanderlust.com/travel-guide-zadar-croatia/" class="text-blue-600 hover:underline">girlswanderlust.com</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Mobile TOC Toggle -->
+    <button id="toc-toggle" class="fixed top-4 left-4 z-50 lg:hidden bg-white rounded-lg p-3 shadow-lg">
+      <i class="fas fa-bars text-slate-600"></i>
+    </button>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.WAVES({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1e3a8a,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.75,
+            zoom: 0.85
+        });
+
+        // Mobile TOC Toggle
+        const tocToggle = document.getElementById('toc-toggle');
+        const tocSidebar = document.querySelector('.toc-sidebar');
+        
+        tocToggle.addEventListener('click', () => {
+            tocSidebar.classList.toggle('open');
+        });
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 && 
+                !tocSidebar.contains(e.target) && 
+                !tocToggle.contains(e.target)) {
+                tocSidebar.classList.remove('open');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile TOC
+                    if (window.innerWidth <= 1024) {
+                        tocSidebar.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-sidebar a[href^="#"]');
+
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('text-blue-600', 'font-semibold');
+                link.classList.add('text-slate-600');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.remove('text-slate-600');
+                    link.classList.add('text-blue-600', 'font-semibold');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+    </script>
+  
+
+</body></html>
